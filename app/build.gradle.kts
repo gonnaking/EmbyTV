@@ -3,16 +3,17 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.9.24"
     id("com.google.devtools.ksp") version "1.9.24-1.0.20"
     id("com.google.dagger.hilt.android") version "2.51.1"
+    id("org.jetbrains.kotlin.plugin.compose") version "1.9.24"
 }
 
 android {
     namespace = "com.example.embytv"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.embytv"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "0.1.0-alpha"
 
@@ -35,42 +36,18 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-        freeCompilerArgs += listOf(
-            "-Xskip-metadata-version-check"
-        )
-    }
+    kotlinOptions { jvmTarget = "17" }
 }
 
 dependencies {
-    // Force all androidx.compose artifacts to 1.6.8.
-    // androidx.tv transitively pulls Compose UI 1.7.x whose
-    // Compose Compiler 1.3.2 is incompatible with Kotlin 1.9.24.
-    implementation("androidx.compose.ui:ui:1.6.8") { because("Compose Compiler compat with Kotlin 1.9.24") }
-    constraints {
-        implementation("androidx.compose.compiler:compiler:1.5.14") {
-            because("Kotlin 1.9.24 compatible Compose Compiler")
-        }
-    }
-    configurations.all {
-        resolutionStrategy {
-            force("androidx.compose.ui:ui:1.6.8")
-            force("androidx.compose.material3:material3:1.2.1")
-            force("androidx.compose.foundation:foundation:1.6.8")
-            force("androidx.compose.runtime:runtime:1.6.8")
-            force("androidx.compose.animation:animation:1.6.8")
-            force("androidx.compose.ui:ui-tooling:1.6.8")
-            force("androidx.compose.ui:ui-tooling-preview:1.6.8")
-            force("androidx.compose.ui:ui-graphics:1.6.8")
-            force("androidx.compose.runtime:runtime-livedata:1.6.8")
-            force("androidx.compose.runtime:runtime-rxjava2:1.6.8")
-            force("androidx.compose.runtime:runtime-rxjava3:1.6.8")
-            force("androidx.compose.runtime:runtime-saveable:1.6.8")
-        }
-    }
-
-    // Compose + TV
+    // --- Compose + TV ---
+    // NOTE: We DO NOT force Compose compiler versions here.
+    // The Kotlin Compose plugin (see above) auto-registers the correct
+    // Compose compiler (1.5.14 for Kotlin 1.9.24).  Any attempt to
+    // override the compiler via resolutionStrategy was causing AGP
+    // AAR-metadata check failures because tv-foundation declares
+    // API level 35 internally while the forced old compiler was
+    // compiled against API 34 metadata.
     implementation("androidx.compose.ui:ui:1.6.8")
     implementation("androidx.compose.material3:material3:1.2.1")
     implementation("androidx.compose.foundation:foundation:1.6.8")
