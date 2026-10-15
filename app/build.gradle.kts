@@ -39,6 +39,32 @@ android {
 }
 
 dependencies {
+    // Force all androidx.compose artifacts to 1.6.8.
+    // androidx.tv transitively pulls Compose UI 1.7.x whose
+    // Compose Compiler 1.3.2 is incompatible with Kotlin 1.9.24.
+    implementation("androidx.compose.ui:ui:1.6.8") { because("Compose Compiler compat with Kotlin 1.9.24") }
+    constraints {
+        implementation("androidx.compose.compiler:compiler:1.5.14") {
+            because("Kotlin 1.9.24 compatible Compose Compiler")
+        }
+    }
+    configurations.all {
+        resolutionStrategy {
+            force("androidx.compose.ui:ui:1.6.8")
+            force("androidx.compose.material3:material3:1.2.1")
+            force("androidx.compose.foundation:foundation:1.6.8")
+            force("androidx.compose.runtime:runtime:1.6.8")
+            force("androidx.compose.animation:animation:1.6.8")
+            force("androidx.compose.ui:ui-tooling:1.6.8")
+            force("androidx.compose.ui:ui-tooling-preview:1.6.8")
+            force("androidx.compose.ui:ui-graphics:1.6.8")
+            force("androidx.compose.runtime:runtime-livedata:1.6.8")
+            force("androidx.compose.runtime:runtime-rxjava2:1.6.8")
+            force("androidx.compose.runtime:runtime-rxjava3:1.6.8")
+            force("androidx.compose.runtime:runtime-saveable:1.6.8")
+        }
+    }
+
     // Compose + TV
     implementation("androidx.compose.ui:ui:1.6.8")
     implementation("androidx.compose.material3:material3:1.2.1")
