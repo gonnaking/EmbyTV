@@ -42,12 +42,12 @@ android {
 
 dependencies {
     // Compose + TV — Kotlin 2.0+ bundles its own compatible Compose compiler
-    implementation("androidx.compose.ui:ui:1.7.5")
-    implementation("androidx.compose.material3:material3:1.3.1")
-    implementation("androidx.compose.foundation:foundation:1.7.5")
+    implementation("androidx.compose.ui:ui:1.6.8")
+    implementation("androidx.compose.material3:material3:1.2.1")
+    implementation("androidx.compose.foundation:foundation:1.6.8")
     implementation("androidx.tv:tv-foundation:1.0.0-alpha12")
     implementation("androidx.tv:tv-material:1.0.0-beta01")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.7.5")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.6.8")
 
     // Lifecycle / ViewModel / Activity
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")

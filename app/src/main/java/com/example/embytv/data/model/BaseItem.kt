@@ -288,6 +288,7 @@ data class SessionProfile(
     val encodingProperties: Map<String, Any>? = null
 )
 
+@kotlinx.serialization.Contextual
 @Serializable
 data class ImageBlurHashes(
     val poster: Map<String, String>? = null,

@@ -4,7 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.Icons.Filled
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -38,7 +40,7 @@ fun DetailScreen(
                 title = { Text("影片详情") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.Default.ArrowBack, "Back")
+                        Icon(Icons.Filled.ArrowBack, "Back")
                     }
                 }
             )
@@ -170,7 +172,7 @@ private fun ItemContent(
             onClick = onPlayClick,
             modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp)
         ) {
-            Icon(Icons.Default.PlayArrow, null)
+            Icon(Icons.Filled.PlayArrow, null)
             Spacer(modifier = Modifier.width(8.dp))
             Text("播放")
         }
