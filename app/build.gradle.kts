@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.example.embytv"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.embytv"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "0.1.0-alpha"
 
@@ -35,7 +35,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions { jvmTarget = "17" }
+    kotlinOptions {
+        jvmTarget = "17"
+        freeCompilerArgs += listOf(
+            "-Xskip-metadata-version-check"
+        )
+    }
 }
 
 dependencies {
