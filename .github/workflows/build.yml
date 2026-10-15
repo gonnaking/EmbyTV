@@ -19,25 +19,18 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      # Generate Gradle wrapper since it's not in repo
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
       - name: Generate Gradle wrapper
         run: |
-          apt-get install -y wget unzip
-          export GRADLE_HOME="$HOME/.sdkman/candidates/gradle/current"
-          if [ ! -d "$GRADLE_HOME" ]; then
-            mkdir -p /tmp/gradle
-            cd /tmp/gradle
-            wget -q https://services.gradle.org/distributions/gradle-8.5-bin.zip
-            unzip -q gradle-8.5-bin.zip
-            export PATH="$(pwd)/gradle-8.5/bin:$PATH"
-          fi
-          gradle wrapper --gradle-version 8.5
+          wget -q https://services.gradle.org/distributions/gradle-8.5-bin.zip -O /tmp/gradle.zip
+          cd /tmp && unzip -q gradle.zip
+          /tmp/gradle-8.5/bin/gradle wrapper --gradle-version 8.5
+        working-directory: ${{ github.workspace }}
 
       - name: Build debug APK
-        run: chmod +x gradlew && ./gradlew assembleDebug --no-daemon
+        run: ./gradlew assembleDebug --no-daemon
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
