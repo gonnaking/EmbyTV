@@ -16,7 +16,7 @@ android {
         versionCode = 1
         versionName = "0.1.0-alpha"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildFeatures {
