@@ -1,9 +1,9 @@
 plugins {
-    id("com.android.application") version "8.5.2"
-    id("org.jetbrains.kotlin.android") version "1.9.24"
-    id("com.google.devtools.ksp") version "1.9.24-1.0.20"
-    id("com.google.dagger.hilt.android") version "2.51.1"
-    id("org.jetbrains.kotlin.plugin.compose") version "1.9.24"
+    id("com.android.application") version "8.6.0"
+    id("org.jetbrains.kotlin.android") version "2.0.21"
+    id("com.google.devtools.ksp") version "2.0.21-1.0.27"
+    id("com.google.dagger.hilt.android") version "2.53"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
 }
 
 android {
@@ -40,20 +40,13 @@ android {
 }
 
 dependencies {
-    // --- Compose + TV ---
-    // NOTE: We DO NOT force Compose compiler versions here.
-    // The Kotlin Compose plugin (see above) auto-registers the correct
-    // Compose compiler (1.5.14 for Kotlin 1.9.24).  Any attempt to
-    // override the compiler via resolutionStrategy was causing AGP
-    // AAR-metadata check failures because tv-foundation declares
-    // API level 35 internally while the forced old compiler was
-    // compiled against API 34 metadata.
-    implementation("androidx.compose.ui:ui:1.6.8")
-    implementation("androidx.compose.material3:material3:1.2.1")
-    implementation("androidx.compose.foundation:foundation:1.6.8")
+    // Compose + TV — Kotlin 2.0+ bundles its own compatible Compose compiler
+    implementation("androidx.compose.ui:ui:1.7.5")
+    implementation("androidx.compose.material3:material3:1.3.1")
+    implementation("androidx.compose.foundation:foundation:1.7.5")
     implementation("androidx.tv:tv-foundation:1.0.0-alpha12")
     implementation("androidx.tv:tv-material:1.0.0-beta01")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.6.8")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.7.5")
 
     // Lifecycle / ViewModel / Activity
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
@@ -88,8 +81,8 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.1.1")
 
     // DI — Hilt
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    ksp("com.google.dagger:hilt-compiler:2.51.1")
+    implementation("com.google.dagger:hilt-android:2.53")
+    ksp("com.google.dagger:hilt-compiler:2.53")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // Testing
