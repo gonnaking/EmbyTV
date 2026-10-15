@@ -1,8 +1,8 @@
 plugins {
-    id("com.android.application") version "8.8.1"
-    id("org.jetbrains.kotlin.android") version "2.0.21"
-    id("com.google.devtools.ksp") version "2.0.21-1.0.27"
-    id("com.google.dagger.hilt.android") version "2.52"
+    id("com.android.application") version "8.6.0"
+    id("org.jetbrains.kotlin.android") version "1.9.24"
+    id("com.google.devtools.ksp") version "1.9.24-1.0.20"
+    id("com.google.dagger.hilt.android") version "2.51.1"
 }
 
 android {
@@ -21,10 +21,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
     }
 
     packaging { resources.excludes += "/META-INF/{AL2.0,LGPL2.1}" }
@@ -86,8 +82,8 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.1.1")
 
     // DI — Hilt
-    implementation("com.google.dagger:hilt-android:2.52")
-    ksp("com.google.dagger:hilt-compiler:2.52")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    ksp("com.google.dagger:hilt-compiler:2.51.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // Testing
