@@ -1,0 +1,14 @@
+# Gradle
+.gradle/
+build/
+*/build/
+idea_caches/
+
+# Android Studio
+.idea/
+*.iml
+*.apk
+
+# Local
+.env
+.local.properties
