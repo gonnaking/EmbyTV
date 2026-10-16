@@ -84,7 +84,7 @@ dependencies {
     // DI — Hilt
     implementation("com.google.dagger:hilt-android:2.53")
     ksp("com.google.dagger:hilt-compiler:2.53")
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     // Testing
     testImplementation("junit:junit:4.13.2")

@@ -51,8 +51,10 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun getPlaybackInfo(itemId: String): PlaybackResponse? {
-        return repository.getPlaybackInfo(itemId)
+    fun getPlaybackInfo(itemId: String): kotlinx.coroutines.Deferred<PlaybackResponse?> {
+        return viewModelScope.async {
+            repository.getPlaybackInfo(itemId)
+        }
     }
 
     fun onMediaSourceSelected(index: Int) {
