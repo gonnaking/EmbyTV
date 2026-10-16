@@ -31,12 +31,13 @@ class LoginViewModel @Inject constructor(
 
     fun authenticate(serverUrl: String, username: String, password: String) {
         viewModelScope.launch {
+            var connectedServerInfo: SystemInfo? = null
             _uiState.value = LoginUiState.Loading(LoginUiState.Loading.Stage.CONNECTING)
             
             // Step 1: Connect to server
             try {
-                val systemInfo = repository.connect(serverUrl)
-                if (systemInfo == null) {
+                connectedServerInfo = repository.connect(serverUrl)
+                if (connectedServerInfo == null) {
                     _uiState.value = LoginUiState.Error("Failed to connect to server")
                     return@launch
                 }
@@ -58,7 +59,7 @@ class LoginViewModel @Inject constructor(
                     )
                     _uiState.value = LoginUiState.Success(
                         userId = result.user?.id ?: "",
-                        serverName = systemInfo?.serverName ?: ""
+                        serverName = connectedServerInfo?.serverName ?: ""
                     )
                 } else {
                     _uiState.value = LoginUiState.Error("Authentication failed")

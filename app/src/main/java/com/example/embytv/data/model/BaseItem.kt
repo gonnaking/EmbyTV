@@ -285,10 +285,9 @@ data class SessionProfile(
     val deviceName: String = "EmbyTV Android",
     val clientVersion: String = "1.0.0",
     var productVersionString: String? = null,
-    val encodingProperties: Map<String, Any>? = null
+    val encodingProperties: Map<String, String>? = null
 )
 
-@kotlinx.serialization.Contextual
 @Serializable
 data class ImageBlurHashes(
     val poster: Map<String, String>? = null,

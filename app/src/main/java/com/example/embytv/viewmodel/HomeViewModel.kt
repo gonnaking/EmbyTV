@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Idle)
-    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<HomeUiState> get() = _uiState
 
     fun loadLibrary(userId: String) {
         viewModelScope.launch {
@@ -39,7 +39,8 @@ class HomeViewModel @Inject constructor(
                 val latestAddedJob = async { repository.getLatestItems(userId, limit = 12) }
                 val moviesJob = async { repository.getUserLibrary(userId).items.take(30) }
                 val seriesJob = async {
-                    repository.getUserItems(userId, includeTypes = "Series").items.take(30)
+                    val library = repository.getUserLibrary(userId)
+                    library.items.filter { it.type == "Series" }.take(30)
                 }
 
                 _uiState.value = HomeUiState.Success(
